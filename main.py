@@ -38,6 +38,9 @@ def extract_products(soup, rates):
 
         price_tag = product_info.find('span', class_='money')
         price_text = price_tag.get_text(strip=True) if price_tag else 'No Price'
+        
+        # Remove commas from the price_text and then convert it to a float
+        price_text = price_text.replace(',', '')
         price_gbp = float(price_text.replace('£', '').replace(' GBP', ''))
 
         price_eur = convert_price(price_gbp, rate_gbp, rate_eur)
